@@ -43,6 +43,10 @@ if Code.ensure_loaded?(Ecto.Type) do
       {:ok, money}
     end
 
+    def cast(str) when is_binary(str) do
+      Money.parse(str)
+    end
+
     def cast({amount, currency}) when is_integer(amount) and (is_binary(currency) or is_atom(currency)) do
       {:ok, Money.new(amount, currency)}
     end
